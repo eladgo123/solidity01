@@ -5,7 +5,7 @@ contract Simplebank {
 uint public numberOfFunders ; 
 mapping (address => bool) private funders; 
 mapping (uint => address) private lutFunders;
-//mapping (address => uint) private lastSum ;
+mapping (address => uint) private lastSum ;
 address public owner ; 
 
 constructor(){
@@ -27,6 +27,10 @@ function transferOwnerShip(address newOwner) external onlyOwner{
          funders[funder] = true ;
          uint index = numberOfFunders ++ ; 
          lutFunders[index] = funder;
+         lastSum[funder] = msg.value;
+      }
+      else{
+         lastSum[funder] += msg.value;
       } 
  }
 
